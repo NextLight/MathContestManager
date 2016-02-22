@@ -1,7 +1,6 @@
 ## Funzionalita
 * Creazione nuova gara
-* Salvataggio gara attuale automatico
-* Caricamento gara da file
+* Salvataggio gara attuale automatico su database
 * Visualizzazione classifica in tempo reale
 * Inserimento risposte delle squadre ai problemi
 
@@ -10,10 +9,6 @@
 * Inserimento nomi delle squadre
 * Inserimento punteggi dei problemi
 * Inserimento delle soluzioni dei problemi
-
-#### Salvataggio
-* Salvataggio su file automatico ogni volta che viene inserita una risposta
-* Salvataggio dello stato attuale della gara comprese le risposte date
 
 #### Visualizzazione classifica
 * Viene visualizzata in una finestra separata
