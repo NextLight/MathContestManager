@@ -18,3 +18,18 @@
 #### Inserimento delle risposte
 * Si inserisce al risposta data dalla squadra selezionata al problema selezionato
 * Se non tutti i dati inseriti sono corretti il pulsante di submit viene disabilitato
+
+
+## Classi
+
+#### Team
+Serve per rappresentare una squadra in gara
+
+###### Proprietà
+* Punteggio attuale in gara
+* Nome
+* Vettore dei problemi
+
+#### Problema
+
+#### ContestManager
