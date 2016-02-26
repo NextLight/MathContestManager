@@ -10,7 +10,9 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-        
         Title="Math Contest Manager" Height="350" Width="525" WindowState="Maximized">
-    <Grid/>
+    <Grid x:Name="grdStart">
+        <Button Name="btnCreateNewMatch" Margin="0 100 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Create new match" FontSize="20" Height="50"/>
+        <Button Name="btnLoadMatch" Margin="0 0 0 100" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Load saved match" FontSize="20" Height="50"/>
+    </Grid>
 </MahControls:MetroWindow>
