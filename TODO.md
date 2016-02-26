@@ -25,11 +25,27 @@
 #### Team
 Serve per rappresentare una squadra in gara
 
-###### Proprietà
-* Punteggio attuale in gara
-* Nome
-* Vettore dei problemi
+* *Problemi*:     vettore dei problemi
+* *Nome*:         il nome della squadra
+* *GetPunteggio*: ottiene il punteggio attuale della squadra
 
 #### Problema
+Rappresenta un problema
+
+* *Valori*:          attributo statico, vettore con i valori dei problemi
+* *Risposte*:        attributo statico, vettore con le riposte dei problemi
+* *ID*:              indince identificativo del problema
+* *Giusto*:          proprieta bool sola lettura, indica se è stata data la risposta giusta
+* *GetPunteggio*:    ottiene il punteggio che da visualizzare nella classifica
+* *GetPunteggioTot*: ottiene il punteggio totale del problema, compresi gli errori
+* *Rispondi*:        metodo per inserire la risposta
 
 #### ContestManager
+Gestisce la gara
+
+* *Squadre*:           vettore di team
+* *InserisciRisposta*: inserisce la risposta al problema indicato per la squadra indicata
+
+#### WindowClassifica
+Mostra la classifica
+* *Refresh*: refresha la classifica
