@@ -24,6 +24,19 @@ namespace MathContestManager
         public MainWindow()
         {
             InitializeComponent();
+
+            // Set visibility for all grids
+            grdStart.Visibility = Visibility.Visible;
+            grdInsertTeams.Visibility = Visibility.Hidden;
+            grdInsertProblems.Visibility = Visibility.Hidden;
         }
+
+        private void btnCreateNewMatch_Click(object sender, RoutedEventArgs e)
+        {
+            //Hide the current grid and show grid to insert teams
+            grdStart.Visibility = Visibility.Hidden;
+            grdInsertTeams.Visibility = Visibility.Visible;
+        }
+
     }
 }
