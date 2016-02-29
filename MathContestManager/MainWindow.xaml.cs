@@ -77,7 +77,7 @@ namespace MathContestManager
         }
         #endregion
 
-        #region Insert Problems Window
+        #region Insert tasks Window
         private void AddLineProblemsListBox()
         {
             ItemsControl itc = itcInsertProblems;
@@ -112,11 +112,8 @@ namespace MathContestManager
         /// <param name="itc">ItemsControl to work with</param>
         private static void RemoveLineFromItemsControl(Button btn, ItemsControl itc)
         {
-            // Cast Items to List
-            var lst = itc.Items.Cast<object>().ToList<object>();
-            // Find index to remove
-            int index = lst.FindIndex(x => ((StackPanel)x).Children.Contains(btn));
-            // Remove the line
+            // Find and remove the ItemControl
+            int index = itc.Items.Cast<object>().ToList().FindIndex(x => ((StackPanel)x).Children.Contains(btn));
             itc.Items.RemoveAt(index);
         }
 
@@ -127,6 +124,7 @@ namespace MathContestManager
         /// <param name="typeOfItem">"team" or "problem" depending on the type of data to be inserted</param>
         private void AddLineToItemsControl(ItemsControl itc, string typeOfItem)
         {
+            // TODO: create custom controls
             // Variables used to store control's text
             string newButtonText = "", textBox1Hint = "", textBox2Hint = "";
             RoutedEventHandler newButtonHandler = null, deleteButtonsHandler = null;
@@ -144,8 +142,8 @@ namespace MathContestManager
             else if (typeOfItem == "problem")
             {
                 newButtonText = "New problem";
-                textBox1Hint = "Problem solution";
-                textBox2Hint = "Problem score";
+                textBox1Hint = "Task solution";
+                textBox2Hint = "Task score";
                 newButtonHandler = btnNewProblem_Click;
                 deleteButtonsHandler = btnRemoveProblemsLine_Click;
             }
