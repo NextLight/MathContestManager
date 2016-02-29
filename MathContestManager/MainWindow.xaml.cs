@@ -22,9 +22,6 @@ namespace MathContestManager
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        // Counter for buttons in InsertTeams listbox
-        int AddLineTeamListBoxCounter = 0;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -63,8 +60,7 @@ namespace MathContestManager
             txtTemp.Style = this.FindResource("MaterialDesignFloatingHintTextBox") as Style;
 
             // Create new button to remove the line
-            Button btnTemp = new Button(){IsTabStop = false,  Name = String.Format("btn{0}", AddLineTeamListBoxCounter), Content = "X", Margin = new Thickness(200, 0, 0, 0), HorizontalAlignment = HorizontalAlignment.Left};
-            AddLineTeamListBoxCounter++;
+            Button btnTemp = new Button(){IsTabStop = false, Content = "X", Margin = new Thickness(200, 0, 0, 0), HorizontalAlignment = HorizontalAlignment.Left};
             btnTemp.Click += btnRemoveTeamLine_Click;
 
             // Add controls to the grid
