@@ -18,13 +18,13 @@
         </Grid>
         <Grid x:Name="grdInsertTeams">
             <ScrollViewer Name="scrInsertTeams" IsTabStop="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0, 0, 0, 100" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
-                <ItemsControl IsTabStop="False" Name="lstInsertTeams" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" />
+                <ItemsControl IsTabStop="False" Name="itcInsertTeams" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" />
             </ScrollViewer>
             <Button Name="btnInsertTeamsSubmit" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Submit" FontSize="20" Click="btnInsertTeamsSubmit_Click"/>
         </Grid>
         <Grid x:Name="grdInsertProblems">
             <ScrollViewer Name="scrInsertProblems" IsTabStop="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0, 0, 0, 100" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
-                <ItemsControl IsTabStop="False" Name="lstInsertProblems" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" />
+                <ItemsControl IsTabStop="False" Name="itcInsertProblems" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" />
             </ScrollViewer>
             <Button Name="btnInsertProblemsSubmit" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Submit" FontSize="20" Click="btnInsertProblemsSubmit_Click"/>
         </Grid>

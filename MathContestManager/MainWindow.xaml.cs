@@ -49,7 +49,7 @@ namespace MathContestManager
         #region Insert Teams Window
         private void AddLineTeamListBox()
         {
-            ItemsControl itc = lstInsertTeams;
+            ItemsControl itc = itcInsertTeams;
             string typeOfItem = "team";
 
             AddLineToItemsControl(itc, typeOfItem);
@@ -63,7 +63,7 @@ namespace MathContestManager
         private void btnRemoveTeamLine_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            ItemsControl itc = lstInsertTeams;
+            ItemsControl itc = itcInsertTeams;
 
             RemoveLineFromItemsControl(btn, itc);
         }
@@ -80,16 +80,21 @@ namespace MathContestManager
         #region Insert Problems Window
         private void AddLineProblemsListBox()
         {
-            ItemsControl itc = lstInsertProblems;
+            ItemsControl itc = itcInsertProblems;
             string typeOfItem = "problem";
 
             AddLineToItemsControl(itc, typeOfItem);
         }
 
+        private void btnNewProblem_Click(object sender, EventArgs e)
+        {
+            AddLineProblemsListBox();
+        }
+
         private void btnRemoveProblemsLine_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            ItemsControl itc = lstInsertProblems;
+            ItemsControl itc = itcInsertProblems;
 
             RemoveLineFromItemsControl(btn, itc);
         }
@@ -100,6 +105,11 @@ namespace MathContestManager
         }
         #endregion
 
+        /// <summary>
+        /// Remove a line from an ItemsControl used to insert data
+        /// </summary>
+        /// <param name="btn">Button that raised the event</param>
+        /// <param name="itc">ItemsControl to work with</param>
         private static void RemoveLineFromItemsControl(Button btn, ItemsControl itc)
         {
             // Cast Items to List
@@ -110,10 +120,16 @@ namespace MathContestManager
             itc.Items.RemoveAt(index);
         }
 
+        /// <summary>
+        /// Adds a line to an ItemsControl used to insert data
+        /// </summary>
+        /// <param name="itc">ItemsControl to work with</param>
+        /// <param name="typeOfItem">"team" or "problem" depending on the type of data to be inserted</param>
         private void AddLineToItemsControl(ItemsControl itc, string typeOfItem)
         {
             // Variables used to store control's text
             string newButtonText = "", textBox1Hint = "", textBox2Hint = "";
+            RoutedEventHandler newButtonHandler = null, deleteButtonsHandler = null;
 
             if (itc.Items.Count == 0)
                 itc.Items.Add(null);
@@ -122,16 +138,20 @@ namespace MathContestManager
             {
                 newButtonText = "New team";
                 textBox1Hint = "Team name";
+                newButtonHandler = btnNewTeam_Click;
+                deleteButtonsHandler = btnRemoveTeamLine_Click;
             }
             else if (typeOfItem == "problem")
             {
                 newButtonText = "New problem";
                 textBox1Hint = "Problem solution";
                 textBox2Hint = "Problem score";
+                newButtonHandler = btnNewProblem_Click;
+                deleteButtonsHandler = btnRemoveProblemsLine_Click;
             }
 
             // Create grid to contain all controls in a line
-            StackPanel grdTemp = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(0) };
+            StackPanel stpTemp = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(0) };
 
             // Create a textbox
             TextBox txtTemp1 = new TextBox()
@@ -168,16 +188,16 @@ namespace MathContestManager
                 Margin = new Thickness(10),
                 HorizontalAlignment = HorizontalAlignment.Left
             };
-            btnTemp.Click += btnRemoveTeamLine_Click;
+            btnTemp.Click += deleteButtonsHandler;
 
             // Add controls to the grid
-            grdTemp.Children.Add(txtTemp1);
+            stpTemp.Children.Add(txtTemp1);
             if (typeOfItem == "problem")
-                grdTemp.Children.Add(txtTemp2);
-            grdTemp.Children.Add(btnTemp);
+                stpTemp.Children.Add(txtTemp2);
+            stpTemp.Children.Add(btnTemp);
 
             // Put grid in the listbox
-            itc.Items[itc.Items.Count - 1] = grdTemp;
+            itc.Items[itc.Items.Count - 1] = stpTemp;
 
             // Add button to create new line
             btnTemp = new Button()
@@ -187,7 +207,7 @@ namespace MathContestManager
                 HorizontalAlignment = HorizontalAlignment.Left,
                 Margin = new Thickness(10)
             };
-            btnTemp.Click += btnNewTeam_Click;
+            btnTemp.Click += newButtonHandler;
             itc.Items.Add(btnTemp);
 
             // Scroll down
