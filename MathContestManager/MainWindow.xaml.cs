@@ -49,72 +49,153 @@ namespace MathContestManager
         #region Insert Teams Window
         private void AddLineTeamListBox()
         {
+            ItemsControl itc = lstInsertTeams;
+            string typeOfItem = "team";
 
-            if (lstInsertTeams.Items.Count == 0)
-                lstInsertTeams.Items.Add(null);
+            AddLineToItemsControl(itc, typeOfItem);
+        }
+
+        private void btnNewTeam_Click(object sender, EventArgs e)
+        {
+            AddLineTeamListBox();
+        }
+
+        private void btnRemoveTeamLine_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            ItemsControl itc = lstInsertTeams;
+
+            RemoveLineFromItemsControl(btn, itc);
+        }
+
+        private void btnInsertTeamsSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            grdInsertTeams.Visibility = Visibility.Hidden;
+            grdInsertProblems.Visibility = Visibility.Visible;
+
+            AddLineProblemsListBox();
+        }
+        #endregion
+
+        #region Insert Problems Window
+        private void AddLineProblemsListBox()
+        {
+            ItemsControl itc = lstInsertProblems;
+            string typeOfItem = "problem";
+
+            AddLineToItemsControl(itc, typeOfItem);
+        }
+
+        private void btnRemoveProblemsLine_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            ItemsControl itc = lstInsertProblems;
+
+            RemoveLineFromItemsControl(btn, itc);
+        }
+
+        private void btnInsertProblemsSubmit_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        private static void RemoveLineFromItemsControl(Button btn, ItemsControl itc)
+        {
+            // Cast Items to List
+            var lst = itc.Items.Cast<object>().ToList<object>();
+            // Find index to remove
+            int index = lst.FindIndex(x => ((StackPanel)x).Children.Contains(btn));
+            // Remove the line
+            itc.Items.RemoveAt(index);
+        }
+
+        private void AddLineToItemsControl(ItemsControl itc, string typeOfItem)
+        {
+            // Variables used to store control's text
+            string newButtonText = "", textBox1Hint = "", textBox2Hint = "";
+
+            if (itc.Items.Count == 0)
+                itc.Items.Add(null);
+
+            if (typeOfItem == "team")
+            {
+                newButtonText = "New team";
+                textBox1Hint = "Team name";
+            }
+            else if (typeOfItem == "problem")
+            {
+                newButtonText = "New problem";
+                textBox1Hint = "Problem solution";
+                textBox2Hint = "Problem score";
+            }
 
             // Create grid to contain all controls in a line
-            Grid grdTemp = new Grid() { HorizontalAlignment = HorizontalAlignment.Stretch, Margin = new Thickness(0) };
+            StackPanel grdTemp = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(0) };
 
-            // Create a textbox to insert the team name
-            TextBox txtTemp = new TextBox() {HorizontalAlignment = HorizontalAlignment.Left, Margin = new Thickness(10), Height = 40, Width = 100};
-            TextFieldAssist.SetHint(txtTemp, "Team name");
-            txtTemp.Style = this.FindResource("MaterialDesignFloatingHintTextBox") as Style;
+            // Create a textbox
+            TextBox txtTemp1 = new TextBox()
+            {
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Margin = new Thickness(10),
+                Height = 40,
+                Width = 100
+            };
+            TextFieldAssist.SetHint(txtTemp1, textBox1Hint);
+            txtTemp1.Style = this.FindResource("MaterialDesignFloatingHintTextBox") as Style;
+
+            // Create another textbox
+            TextBox txtTemp2 = null;
+            if (typeOfItem == "problem")
+            {
+                txtTemp2 = new TextBox()
+                {
+                    VerticalContentAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    Margin = new Thickness(10),
+                    Height = 40,
+                    Width = 100
+                };
+                TextFieldAssist.SetHint(txtTemp2, textBox2Hint);
+                txtTemp2.Style = this.FindResource("MaterialDesignFloatingHintTextBox") as Style;
+            }
 
             // Create new button to remove the line
             Button btnTemp = new Button()
             {
                 IsTabStop = false,
                 Content = new PackIcon() { Kind = PackIconKind.Delete },
-                Margin = new Thickness(200, 0, 0, 0),
+                Margin = new Thickness(10),
                 HorizontalAlignment = HorizontalAlignment.Left
             };
             btnTemp.Click += btnRemoveTeamLine_Click;
 
             // Add controls to the grid
-            grdTemp.Children.Add(txtTemp);
+            grdTemp.Children.Add(txtTemp1);
+            if (typeOfItem == "problem")
+                grdTemp.Children.Add(txtTemp2);
             grdTemp.Children.Add(btnTemp);
 
             // Put grid in the listbox
-            lstInsertTeams.Items[lstInsertTeams.Items.Count - 1] = grdTemp;
+            itc.Items[itc.Items.Count - 1] = grdTemp;
 
             // Add button to create new line
             btnTemp = new Button()
             {
                 IsDefault = true,
-                Content = "New Team",
+                Content = newButtonText,
                 HorizontalAlignment = HorizontalAlignment.Left,
                 Margin = new Thickness(10)
             };
-            btnTemp.Click += btnNewTeam_Click; 
-            lstInsertTeams.Items.Add(btnTemp);
+            btnTemp.Click += btnNewTeam_Click;
+            itc.Items.Add(btnTemp);
 
             // Scroll down
             scrInsertTeams.ScrollToEnd();
 
             // Focus the new textbox
-            txtTemp.Focus();
+            txtTemp1.Focus();
         }
-
-        void btnNewTeam_Click(object sender, EventArgs e)
-        {
-            AddLineTeamListBox();
-        }
-
-        void btnRemoveTeamLine_Click(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            
-            // Cast Items to List
-            var lst = lstInsertTeams.Items.Cast<object>().ToList<object>();
-            // Find index to remove
-            int index = lst.FindIndex(x => ((Grid)x).Children.Contains(btn));
-            // Remove the line
-            lstInsertTeams.Items.RemoveAt(index);
-
-        }
-        #endregion
-
         #endregion
     }
 }
