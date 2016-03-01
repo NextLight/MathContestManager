@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace MathContestManager
 {
+    class Solution
+    {
+        public int? Answer { get; set; }
+        public int? Score { get; set; }
+    }
     class Task
     {
-        private static int _errorScore;
-        private static string[] _answers;
-        private static int[] _scores;
+        private static int _errorScore = 10;
+        private static Solution[] _solutions;
 
         private int _errors = 0;
 
@@ -36,7 +40,7 @@ namespace MathContestManager
         {
             get
             {
-                return IsRight ? _scores[Id] : _errorScore * _errors;
+                return IsRight ? _solutions[Id].Score.Value : _errorScore * _errors;
             }
         }
 
@@ -47,7 +51,7 @@ namespace MathContestManager
         {
             get
             {
-                return _errorScore * _errors + (IsRight ? _scores[Id] : 0);
+                return _errorScore * _errors + (IsRight ? _solutions[Id].Score.Value : 0);
             }
         }
 
@@ -55,9 +59,9 @@ namespace MathContestManager
         /// Insert task's answer
         /// </summary>
         /// <param name="ans">Answer</param>
-        public void InsertAnswer(string ans)
+        public void InsertAnswer(int ans)
         {
-            if (ans == _answers[Id])
+            if (ans == _solutions[Id].Answer)
                 IsRight = true;
             else
                 ++_errors;
@@ -66,14 +70,12 @@ namespace MathContestManager
         /// <summary>
         /// Sets tasks' datas
         /// </summary>
-        /// <param name="ans">Vector of 4-digits strings, the answers to the tasks</param>
-        /// <param name="sco">Vector of ints, the score assigned when the right answer is given</param>
+        /// <param name="solutions">Array with the solution to each task.</param>
         /// <param name="errSco">Score to be subtracted from the total score when a wrong answer is given</param>
-        public void SetValues(string[] ans, int[] sco, int errSco)
+        public static void SetValues(IEnumerable<Solution> solutions, int errScore)
         {
-            _answers = ans;
-            _scores = sco;
-            _errorScore = -errSco;
+            _solutions = solutions.ToArray();
+            _errorScore = -errScore;
         }
     }
 }

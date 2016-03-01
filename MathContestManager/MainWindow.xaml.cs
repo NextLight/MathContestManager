@@ -22,6 +22,7 @@ namespace MathContestManager
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        Team[] teams;
         public MainWindow()
         {
             InitializeComponent();
@@ -29,191 +30,54 @@ namespace MathContestManager
 
         private void winMain_Loaded(object sender, RoutedEventArgs e)
         {
-            // Set visibility for all grids
             grdStart.Visibility = Visibility.Visible;
             grdInsertTeams.Visibility = Visibility.Hidden;
-            grdInsertProblems.Visibility = Visibility.Hidden;
+            grdInsertTasks.Visibility = Visibility.Hidden;
         }
-
-        #region Create New Match
+        
         private void btnCreateNewMatch_Click(object sender, RoutedEventArgs e)
         {
-            // Hide the current grid and show grid to insert teams
             grdStart.Visibility = Visibility.Hidden;
             grdInsertTeams.Visibility = Visibility.Visible;
 
-            // Insert the first element in team listbox
-            AddLineTeamListBox();
+            itcTeams.Items.Add(new Team());
         }
 
-        #region Insert Teams Window
-        private void AddLineTeamListBox()
+        private void btnInsertTeams_Click(object sender, RoutedEventArgs e)
         {
-            ItemsControl itc = itcInsertTeams;
-            string typeOfItem = "team";
+            teams = itcTeams.Items.Cast<Team>().ToArray();
 
-            AddLineToItemsControl(itc, typeOfItem);
-        }
-
-        private void btnNewTeam_Click(object sender, EventArgs e)
-        {
-            AddLineTeamListBox();
-        }
-
-        private void btnRemoveTeamLine_Click(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            ItemsControl itc = itcInsertTeams;
-
-            RemoveLineFromItemsControl(btn, itc);
-        }
-
-        private void btnInsertTeamsSubmit_Click(object sender, RoutedEventArgs e)
-        {
             grdInsertTeams.Visibility = Visibility.Hidden;
-            grdInsertProblems.Visibility = Visibility.Visible;
+            grdInsertTasks.Visibility = Visibility.Visible;
 
-            AddLineProblemsListBox();
+            itcTasks.Items.Add(new Solution());
         }
-        #endregion
 
-        #region Insert tasks Window
-        private void AddLineProblemsListBox()
+        private void TextBox_Loaded(object sender, RoutedEventArgs e)
         {
-            ItemsControl itc = itcInsertProblems;
-            string typeOfItem = "problem";
-
-            AddLineToItemsControl(itc, typeOfItem);
+            ((TextBox) sender).Focus();
         }
 
-        private void btnNewProblem_Click(object sender, EventArgs e)
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
         {
-            AddLineProblemsListBox();
+            var btn = (Button) sender;
+            btn.TryFindParent<ItemsControl>().Items.Remove(btn.DataContext);
         }
 
-        private void btnRemoveProblemsLine_Click(object sender, EventArgs e)
+        private void btnAddItemTeam_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = (Button)sender;
-            ItemsControl itc = itcInsertProblems;
-
-            RemoveLineFromItemsControl(btn, itc);
+            itcTeams.Items.Add(new Team());
         }
 
-        private void btnInsertProblemsSubmit_Click(object sender, EventArgs e)
+        private void btnAddItemTask_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            itcTasks.Items.Add(new Solution());
         }
-        #endregion
 
-        /// <summary>
-        /// Remove a line from an ItemsControl used to insert data
-        /// </summary>
-        /// <param name="btn">Button that raised the event</param>
-        /// <param name="itc">ItemsControl to work with</param>
-        private static void RemoveLineFromItemsControl(Button btn, ItemsControl itc)
+        private void btnInsertTasks_Click(object sender, RoutedEventArgs e)
         {
-            // Find and remove the ItemControl
-            int index = itc.Items.Cast<object>().ToList().FindIndex(x => ((StackPanel)x).Children.Contains(btn));
-            itc.Items.RemoveAt(index);
+            Task.SetValues(itcTasks.Items.Cast<Solution>(), 10);
+            // TODO: implement ranking DataGrid/ListView
         }
-
-        /// <summary>
-        /// Adds a line to an ItemsControl used to insert data
-        /// </summary>
-        /// <param name="itc">ItemsControl to work with</param>
-        /// <param name="typeOfItem">"team" or "problem" depending on the type of data to be inserted</param>
-        private void AddLineToItemsControl(ItemsControl itc, string typeOfItem)
-        {
-            // TODO: create custom controls
-            // Variables used to store control's text
-            string newButtonText = "", textBox1Hint = "", textBox2Hint = "";
-            RoutedEventHandler newButtonHandler = null, deleteButtonsHandler = null;
-
-            if (itc.Items.Count == 0)
-                itc.Items.Add(null);
-
-            if (typeOfItem == "team")
-            {
-                newButtonText = "New team";
-                textBox1Hint = "Team name";
-                newButtonHandler = btnNewTeam_Click;
-                deleteButtonsHandler = btnRemoveTeamLine_Click;
-            }
-            else if (typeOfItem == "problem")
-            {
-                newButtonText = "New problem";
-                textBox1Hint = "Task solution";
-                textBox2Hint = "Task score";
-                newButtonHandler = btnNewProblem_Click;
-                deleteButtonsHandler = btnRemoveProblemsLine_Click;
-            }
-
-            // Create grid to contain all controls in a line
-            StackPanel stpTemp = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(0) };
-
-            // Create a textbox
-            TextBox txtTemp1 = new TextBox()
-            {
-                HorizontalAlignment = HorizontalAlignment.Left,
-                Margin = new Thickness(10),
-                Height = 40,
-                Width = 100
-            };
-            TextFieldAssist.SetHint(txtTemp1, textBox1Hint);
-            txtTemp1.Style = this.FindResource("MaterialDesignFloatingHintTextBox") as Style;
-
-            // Create another textbox
-            TextBox txtTemp2 = null;
-            if (typeOfItem == "problem")
-            {
-                txtTemp2 = new TextBox()
-                {
-                    VerticalContentAlignment = VerticalAlignment.Center,
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    Margin = new Thickness(10),
-                    Height = 40,
-                    Width = 100
-                };
-                TextFieldAssist.SetHint(txtTemp2, textBox2Hint);
-                txtTemp2.Style = this.FindResource("MaterialDesignFloatingHintTextBox") as Style;
-            }
-
-            // Create new button to remove the line
-            Button btnTemp = new Button()
-            {
-                IsTabStop = false,
-                Content = new PackIcon() { Kind = PackIconKind.Delete },
-                Margin = new Thickness(10),
-                HorizontalAlignment = HorizontalAlignment.Left
-            };
-            btnTemp.Click += deleteButtonsHandler;
-
-            // Add controls to the grid
-            stpTemp.Children.Add(txtTemp1);
-            if (typeOfItem == "problem")
-                stpTemp.Children.Add(txtTemp2);
-            stpTemp.Children.Add(btnTemp);
-
-            // Put grid in the listbox
-            itc.Items[itc.Items.Count - 1] = stpTemp;
-
-            // Add button to create new line
-            btnTemp = new Button()
-            {
-                IsDefault = true,
-                Content = newButtonText,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                Margin = new Thickness(10)
-            };
-            btnTemp.Click += newButtonHandler;
-            itc.Items.Add(btnTemp);
-
-            // Scroll down
-            scrInsertTeams.ScrollToEnd();
-
-            // Focus the new textbox
-            txtTemp1.Focus();
-        }
-        #endregion
     }
 }
