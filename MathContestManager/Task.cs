@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace MathContestManager
 {
-    class Solution
+    public class Solution
     {
         public int? Answer { get; set; }
         public int? Score { get; set; }
     }
-    class Task
+    public class Task
     {
         private static int _errorScore = 10;
         private static Solution[] _solutions;

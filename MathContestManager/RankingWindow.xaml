@@ -13,6 +13,6 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="Contest Ranking" Height="350" Width="525">
     <Grid>
-        
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding}"/>
     </Grid>
 </MahControls:MetroWindow>

@@ -35,7 +35,7 @@
                 </ItemsControl>
             </ScrollViewer>
             <Button x:Name="btnAddItemTeam" Margin="10,0,0,10" Click="btnAddItemTeam_Click" Content="New Team" HorizontalAlignment="Left" Width="100" VerticalAlignment="Bottom" IsDefault="True" />
-            <Button Name="btnInsertTeams" Margin="410,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Click="btnInsertTeams_Click" >
+            <Button Name="btnInsertTeams" Margin="459,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Click="btnInsertTeams_Click" >
                 <md:PackIcon Kind="Send" />
             </Button>
         </Grid>
@@ -58,7 +58,7 @@
                 </ItemsControl>
             </ScrollViewer>
             <Button x:Name="btnAddItemTask" Margin="10,0,0,10" Click="btnAddItemTask_Click" Content="New Task" HorizontalAlignment="Left" Width="100" VerticalAlignment="Bottom" IsDefault="True" />
-            <Button Name="btnInsertTasks" Margin="410,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Click="btnInsertTasks_Click" >
+            <Button Name="btnInsertTasks" Margin="459,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Click="btnInsertTasks_Click" >
                 <md:PackIcon Kind="Send" />
             </Button>
         </Grid>

@@ -22,7 +22,7 @@ namespace MathContestManager
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        Team[] teams;
+        ContestManager cm;
         public MainWindow()
         {
             InitializeComponent();
@@ -45,7 +45,7 @@ namespace MathContestManager
 
         private void btnInsertTeams_Click(object sender, RoutedEventArgs e)
         {
-            teams = itcTeams.Items.Cast<Team>().ToArray();
+            cm = new ContestManager(itcTeams.Items.Cast<Team>());
 
             grdInsertTeams.Visibility = Visibility.Hidden;
             grdInsertTasks.Visibility = Visibility.Visible;
@@ -78,6 +78,7 @@ namespace MathContestManager
         {
             Task.SetValues(itcTasks.Items.Cast<Solution>(), 10);
             // TODO: implement ranking DataGrid/ListView
+            new RankingWindow(cm).Show();
         }
     }
 }

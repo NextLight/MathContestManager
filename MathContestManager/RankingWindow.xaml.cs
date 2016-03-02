@@ -22,9 +22,12 @@ namespace MathContestManager
     /// </summary>
     public partial class RankingWindow : MetroWindow
     {
-        public RankingWindow()
+        private ContestManager _cm;
+        public RankingWindow(ContestManager cm)
         {
             InitializeComponent();
+            _cm = cm;
+            //dataGrid.DataContext = // TODO
         }
     }
 }

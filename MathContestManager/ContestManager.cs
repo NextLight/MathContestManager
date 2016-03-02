@@ -6,32 +6,30 @@ using System.Threading.Tasks;
 
 namespace MathContestManager
 {
-    class ContestManager
+    public class ContestManager
     {
         /// <summary>
         /// List of teams in the match
         /// </summary>
-        public List<Team> Teams { get; set; }
+        public Team[] Teams { get; set; }
 
-        public ContestManager()
+        public ContestManager(IEnumerable<Team> teams)
         {
-            Teams = new List<Team>();
+            Teams = teams.ToArray();
         }
 
         /// <summary>
         /// Insert the answer for a task given from a team
         /// </summary>
         /// <param name="teamName">Name of the team wich gave the answer</param>
-        /// <param name="task">Index of the task</param>
+        /// <param name="taskId">Index of the task</param>
         /// <param name="answer">Answer</param>
-        public void InsertAnswer(string teamName, int task, int answer)
+        public void InsertAnswer(string teamName, int taskId, int answer)
         {
-            try
-            {
-                Team team = Teams.Find(x => x.Name == teamName);
-                team.Tasks[task].InsertAnswer(answer);
-            }
-            catch { }
+            var tasks = Teams.First(x => x.Name == teamName).Tasks;
+            if (!tasks.Any(t => t.Id == taskId))
+                tasks.Add(new Task(taskId));
+            tasks.First(t => t.Id == taskId).InsertAnswer(answer);
         }
     }
 }

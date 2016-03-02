@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathContestManager
 {
-    class Team
+    public class Team
     {
         public Team()
         {
