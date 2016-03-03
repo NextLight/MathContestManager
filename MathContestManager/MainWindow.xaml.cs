@@ -77,7 +77,11 @@ namespace MathContestManager
         private void btnInsertTasks_Click(object sender, RoutedEventArgs e)
         {
             Task.SetValues(itcTasks.Items.Cast<Solution>(), 10);
-            // TODO: implement ranking DataGrid/ListView
+
+            // Create an instance for tasks in every team
+            List<Task> tmpList = new Task[itcTasks.Items.Count].Select((x, i) => new Task(i)).ToList();
+            cm.Teams = cm.Teams.Select((x, i) => new Team() { Name = x.Name, Tasks = tmpList.ToList() }).ToList(); //TODO: try to do this in a better way
+
             new RankingWindow(cm).Show();
         }
     }

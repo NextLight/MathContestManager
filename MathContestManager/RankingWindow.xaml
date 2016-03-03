@@ -13,6 +13,8 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="Contest Ranking" Height="350" Width="525">
     <Grid>
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding}"/>
+        <DataGrid Name="dgRankingGrid" ItemsSource="{Binding}" HeadersVisibility="All"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False"
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False"/>
     </Grid>
 </MahControls:MetroWindow>

@@ -11,11 +11,11 @@ namespace MathContestManager
         /// <summary>
         /// List of teams in the match
         /// </summary>
-        public Team[] Teams { get; set; }
+        public List<Team> Teams { get; set; }
 
         public ContestManager(IEnumerable<Team> teams)
         {
-            Teams = teams.ToArray();
+            Teams = teams.ToList();
         }
 
         /// <summary>

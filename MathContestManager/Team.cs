@@ -15,7 +15,7 @@ namespace MathContestManager
         /// <summary>
         /// Team's tasks status
         /// </summary>
-        public List<Task> Tasks { get; private set; }
+        public List<Task> Tasks { get; set; }
 
         /// <summary>
         /// Team's name

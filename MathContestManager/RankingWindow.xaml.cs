@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MaterialDesignThemes.Wpf;
+using System.Data;
 
 namespace MathContestManager
 {
@@ -23,11 +24,33 @@ namespace MathContestManager
     public partial class RankingWindow : MetroWindow
     {
         private ContestManager _cm;
+
+        private DataTable rankingTable;
+
         public RankingWindow(ContestManager cm)
         {
             InitializeComponent();
             _cm = cm;
-            //dataGrid.DataContext = // TODO
+            rankingTable = new DataTable();
+
+            DataColumn[] dc = _cm.Teams[0].Tasks.Select((x, i) => new DataColumn(x.Id.ToString(), typeof(int))).ToArray<DataColumn>();
+            rankingTable.Columns.AddRange(dc);
+
+            foreach (Team team in _cm.Teams)
+            {
+                // Create new row with same structure of the table
+                DataRow row = rankingTable.NewRow();
+
+                // Create the row with scores
+                row.ItemArray = team.Tasks.Select(x => x.Score).Cast<object>().ToArray();
+
+                // Add row to the table
+                rankingTable.Rows.Add(row);
+
+                //TODO: add row header
+            }
+            
+            dgRankingGrid.DataContext = rankingTable.DefaultView;
         }
     }
 }
