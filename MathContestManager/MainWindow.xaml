@@ -14,24 +14,34 @@
         BorderThickness="1"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="Math Contest Manager" Height="350" Width="525" Loaded="winMain_Loaded">
+    <MahControls:MetroWindow.Resources>
+        <SolidColorBrush x:Key="MaterialDesignCardBackgroundBrush" Color="{StaticResource Primary50}" />
+        <SolidColorBrush x:Key="MaterialDesignCardForegroundBrush" Color="{StaticResource Primary50Foreground}" />
+    </MahControls:MetroWindow.Resources>
+    
     <Grid>
+        <!-- Start grid -->
         <Grid x:Name="grdStart" Visibility="Hidden">
-            <Button Name="btnCreateNewMatch" Margin="0 100 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Create new match" FontSize="20" Height="50" Click="btnCreateNewMatch_Click"/>
-            <Button Name="btnLoadMatch" Margin="0 0 0 100" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Load saved match" FontSize="20" Height="50"/>
+            <Button Name="btnCreateNewMatch" Margin="0, 100, 0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Create new match" FontSize="20" Height="50" Click="btnCreateNewMatch_Click"/>
+            <Button Name="btnLoadMatch" Margin="0, 0, 0, 100" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Load saved match" FontSize="20" Height="50"/>
         </Grid>
+        
+        <!-- Grid to insert teams -->
         <Grid x:Name="grdInsertTeams">
             <ScrollViewer IsTabStop="False" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0,0,0,50" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
                 <ItemsControl IsTabStop="False" Name="itcTeams" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBox FontSize="17" Text="{Binding Name}" Margin="10" Width="100" md:TextFieldAssist.Hint="Team Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Loaded="TextBox_Loaded" />
-                                <Button Click="ButtonDelete_Click" Focusable="False" Margin="10">
-                                    <Button.Content>
-                                        <md:PackIcon Kind="Delete"/>
-                                    </Button.Content>
-                                </Button>
-                            </StackPanel>
+                            <md:Card Margin="4" Padding="20, 0, 20, 0" Background="{StaticResource MaterialDesignCardBackgroundBrush}" >
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox FontSize="17" Text="{Binding Name}" Margin="10" Width="100" md:TextFieldAssist.Hint="Team Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="{StaticResource MaterialDesignCardForegroundBrush}" Loaded="TextBox_Loaded" />
+                                    <Button Click="ButtonDelete_Click" Focusable="False" Margin="10">
+                                        <Button.Content>
+                                            <md:PackIcon Kind="Delete"/>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                            </md:Card>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -41,20 +51,24 @@
                 <md:PackIcon Kind="Send" />
             </Button>
         </Grid>
+        
+        <!-- Grid to insert tasks -->
         <Grid x:Name="grdInsertTasks">
             <ScrollViewer IsTabStop="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0, 0, 0, 100" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
                 <ItemsControl IsTabStop="False" Name="itcTasks" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0" >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBox Text="{Binding Answer}" Width="100" MaxLength="4" Margin="10" md:TextFieldAssist.Hint="Answer" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="17" Loaded="TextBox_Loaded" />
-                                <TextBox Text="{Binding Score}" Width="100" MaxLength="3" Margin="10" md:TextFieldAssist.Hint="Score" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="17" />
-                                <Button Margin="10" Focusable="False" Click="ButtonDelete_Click" >
-                                    <Button.Content>
-                                        <md:PackIcon Kind="Delete"/>
-                                    </Button.Content>
-                                </Button>
-                            </StackPanel>
+                            <md:Card Margin="4" Padding="20, 0, 20, 0" Background="{StaticResource MaterialDesignCardBackgroundBrush}" >
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding Answer}" Width="100" MaxLength="4" Margin="10" md:TextFieldAssist.Hint="Task Answer" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="17" Foreground="{StaticResource MaterialDesignCardForegroundBrush}" Loaded="TextBox_Loaded" />
+                                    <TextBox Text="{Binding Score}" Width="100" MaxLength="3" Margin="10" md:TextFieldAssist.Hint="Task Score" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="{StaticResource MaterialDesignCardForegroundBrush}" FontSize="17" />
+                                    <Button Margin="10" Focusable="False" Click="ButtonDelete_Click" >
+                                        <Button.Content>
+                                            <md:PackIcon Kind="Delete"/>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                            </md:Card>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
