@@ -10,6 +10,8 @@
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="Contest Ranking" Height="350" Width="525">
     <Grid>
