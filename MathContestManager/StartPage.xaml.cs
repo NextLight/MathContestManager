@@ -12,21 +12,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
-using MaterialDesignThemes.Wpf;
 
 namespace MathContestManager
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logica di interazione per StartPage.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class StartPage : Page
     {
-        public ContestManager cm;
+        MainWindow parentWindow;
 
-        public MainWindow()
+        public StartPage()
         {
             InitializeComponent();
         }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            parentWindow = (MainWindow)Window.GetWindow(this);
+        }
+
+        private void btnCreateNewMatch_Click(object sender, RoutedEventArgs e)
+        {
+            parentWindow.frmContainer.Navigate(new InsertTeamsPage());
+        }
+
     }
 }

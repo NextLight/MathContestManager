@@ -1,0 +1,41 @@
+﻿<Page x:Class="MathContestManager.InsertTeamsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MathContestManager"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="InsertTeamsPage" Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <SolidColorBrush x:Key="MaterialDesignCardBackgroundBrush" Color="{StaticResource Primary50}" />
+        <SolidColorBrush x:Key="MaterialDesignCardForegroundBrush" Color="{StaticResource Primary50Foreground}" />
+    </Page.Resources>
+    
+    <Grid>
+        <ScrollViewer IsTabStop="False" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0,0,0,50" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+            <ItemsControl IsTabStop="False" Name="itcTeams" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <md:Card Margin="4" Padding="20, 0, 20, 0" Background="{StaticResource MaterialDesignCardBackgroundBrush}" >
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox FontSize="17" Text="{Binding Name}" Margin="10" Width="100" md:TextFieldAssist.Hint="Team Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="{StaticResource MaterialDesignCardForegroundBrush}" Loaded="TextBox_Loaded" />
+                                <Button Click="ButtonDelete_Click" Focusable="False" Margin="10">
+                                    <Button.Content>
+                                        <md:PackIcon Kind="Delete"/>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+                        </md:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Button Name="btnAddItemTeam" Margin="50,0,0,30" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="120" Height="40" Content="New Team"  IsDefault="True" FontSize="17" Click="btnAddItemTeam_Click"/>
+        <Button Name="btnInsertTeams" Margin="0,0,50,30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="60" Height="40" FontSize="20" Click="btnInsertTeams_Click" >
+            <md:PackIcon Kind="Send" />
+        </Button>
+    </Grid>
+</Page>

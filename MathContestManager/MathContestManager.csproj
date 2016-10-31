@@ -79,11 +79,28 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ContestManager.cs" />
+    <Compile Include="InsertTasksPage.xaml.cs">
+      <DependentUpon>InsertTasksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InsertTeamsPage.xaml.cs">
+      <DependentUpon>InsertTeamsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RankingWindow.xaml.cs">
       <DependentUpon>RankingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Task.cs" />
     <Compile Include="Team.cs" />
+    <Page Include="InsertTasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InsertTeamsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -97,6 +114,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RankingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
