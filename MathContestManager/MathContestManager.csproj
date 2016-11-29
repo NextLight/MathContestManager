@@ -79,25 +79,25 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ContestManager.cs" />
-    <Compile Include="InsertTasksPage.xaml.cs">
-      <DependentUpon>InsertTasksPage.xaml</DependentUpon>
+    <Compile Include="InsertTasksControl.xaml.cs">
+      <DependentUpon>InsertTasksControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InsertTeamsPage.xaml.cs">
-      <DependentUpon>InsertTeamsPage.xaml</DependentUpon>
+    <Compile Include="InsertTeamsControl.xaml.cs">
+      <DependentUpon>InsertTeamsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="RankingWindow.xaml.cs">
       <DependentUpon>RankingWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StartPage.xaml.cs">
-      <DependentUpon>StartPage.xaml</DependentUpon>
+    <Compile Include="StartControl.xaml.cs">
+      <DependentUpon>StartControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Task.cs" />
     <Compile Include="Team.cs" />
-    <Page Include="InsertTasksPage.xaml">
+    <Page Include="InsertTasksControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InsertTeamsPage.xaml">
+    <Page Include="InsertTeamsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,7 +117,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StartPage.xaml">
+    <Page Include="StartControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

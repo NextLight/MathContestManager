@@ -18,7 +18,7 @@ namespace MathContestManager
     /// <summary>
     /// Logica di interazione per StartPage.xaml
     /// </summary>
-    public partial class StartPage : Page
+    public partial class StartPage : UserControl
     {
         MainWindow parentWindow;
 
@@ -33,7 +33,7 @@ namespace MathContestManager
 
         private void btnCreateNewMatch_Click(object sender, RoutedEventArgs e)
         {
-            parentWindow.frmContainer.Navigate(new InsertTeamsPage());
+            parentWindow.ccMain.Content = new InsertTeamsControl();
         }
 
     }

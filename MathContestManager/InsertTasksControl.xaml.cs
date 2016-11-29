@@ -18,18 +18,18 @@ using MaterialDesignThemes.Wpf;
 namespace MathContestManager
 {
     /// <summary>
-    /// Logica di interazione per InsertTasksPage.xaml
+    /// Logica di interazione per InsertTasksControl.xaml
     /// </summary>
-    public partial class InsertTasksPage : Page
+    public partial class InsertTasksControl : UserControl
     {
         MainWindow parentWindow;
 
-        public InsertTasksPage()
+        public InsertTasksControl()
         {
             InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Control_Loaded(object sender, RoutedEventArgs e)
         {
             parentWindow = Window.GetWindow(this) as MainWindow;
             itcTasks.Items.Add(new Solution());

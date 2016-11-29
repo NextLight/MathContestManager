@@ -20,6 +20,10 @@
     </MahControls:MetroWindow.Resources>
     
     <Grid>
-        <Frame Name="frmContainer" Source="StartPage.xaml" NavigationUIVisibility="Hidden"/>
+        <ContentControl Name="ccMain">
+            <ContentControl.Content>
+                <local:StartPage/>
+            </ContentControl.Content>
+        </ContentControl>
     </Grid>
 </MahControls:MetroWindow>
