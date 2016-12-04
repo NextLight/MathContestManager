@@ -13,17 +13,14 @@
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-        Title="Math Contest Manager" Height="350" Width="525">
+        Title="Math Contest Manager" Height="350" Width="525"
+        Loaded="winMain_Loaded">
     <MahControls:MetroWindow.Resources>
         <SolidColorBrush x:Key="MaterialDesignCardBackgroundBrush" Color="{StaticResource Primary50}" />
         <SolidColorBrush x:Key="MaterialDesignCardForegroundBrush" Color="{StaticResource Primary50Foreground}" />
     </MahControls:MetroWindow.Resources>
     
     <Grid>
-        <ContentControl Name="ccMain">
-            <ContentControl.Content>
-                <local:StartPage/>
-            </ContentControl.Content>
-        </ContentControl>
+        <ContentControl Name="ccMain" />
     </Grid>
 </MahControls:MetroWindow>

@@ -18,9 +18,9 @@ using MaterialDesignThemes.Wpf;
 namespace MathContestManager
 {
     /// <summary>
-    /// Logica di interazione per InsertTasksControl.xaml
+    /// Interaction logic for InsertTasksControl.xaml
     /// </summary>
-    public partial class InsertTasksControl : UserControl
+    public partial class InsertTasksControl : View
     {
         MainWindow parentWindow;
 
@@ -53,9 +53,7 @@ namespace MathContestManager
 
         private void btnInsertTasks_Click(object sender, RoutedEventArgs e)
         {
-            parentWindow.cm.Tasks = itcTasks.Items.Cast<ContestTask>() ;
-
-            new RankingWindow(parentWindow.cm).Show();
+            OnViewFinished(itcTasks.Items.Cast<ContestTask>());
         }
     }
 }

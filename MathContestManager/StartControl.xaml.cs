@@ -16,25 +16,18 @@ using System.Windows.Shapes;
 namespace MathContestManager
 {
     /// <summary>
-    /// Logica di interazione per StartPage.xaml
+    /// Interaction logic for StartControl.xaml
     /// </summary>
-    public partial class StartPage : UserControl
+    public partial class StartControl : View
     {
-        MainWindow parentWindow;
-
-        public StartPage()
+        public StartControl()
         {
             InitializeComponent();
         }
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            parentWindow = (MainWindow)Window.GetWindow(this);
-        }
 
-        private void btnCreateNewMatch_Click(object sender, RoutedEventArgs e)
+        private void btnCreateNewContest_Click(object sender, RoutedEventArgs e)
         {
-            parentWindow.ccMain.Content = new InsertTeamsControl();
+            OnViewFinished("create");
         }
-
     }
 }

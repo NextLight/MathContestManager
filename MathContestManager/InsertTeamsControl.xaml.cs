@@ -18,20 +18,16 @@ using MaterialDesignThemes.Wpf;
 namespace MathContestManager
 {
     /// <summary>
-    /// Logica di interazione per InsertTeamsControl.xaml
+    /// Interaction logic for InsertTeamsControl.xaml
     /// </summary>
-    public partial class InsertTeamsControl : UserControl
+    public partial class InsertTeamsControl : View
     {
-        MainWindow parentWindow;
-
         public InsertTeamsControl()
         {
             InitializeComponent();
         }
-
         private void Control_Loaded(object sender, RoutedEventArgs e)
         {
-            parentWindow = Window.GetWindow(this) as MainWindow;
             itcTeams.Items.Add(new ContestTeam());
         }
 
@@ -53,9 +49,7 @@ namespace MathContestManager
 
         private void btnInsertTeams_Click(object sender, RoutedEventArgs e)
         {
-            parentWindow.cm.Teams = itcTeams.Items.Cast<ContestTeam>();
-            parentWindow.ccMain.Content = new InsertTasksControl();
+            OnViewFinished(itcTeams.Items.Cast<ContestTeam>());
         }
-
     }
 }

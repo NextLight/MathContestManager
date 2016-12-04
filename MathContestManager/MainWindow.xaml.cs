@@ -28,5 +28,32 @@ namespace MathContestManager
         {
             InitializeComponent();
         }
+
+        private void winMain_Loaded(object sender, RoutedEventArgs e)
+        {
+            ccMain.Content = new StartControl();
+            ((View)ccMain.Content).ViewFinished += StartControl_ViewFinished;
+        }
+
+        private void StartControl_ViewFinished(object sender, ViewFinishedEventArgs e)
+        {
+            if((string)e.Data == "create")
+            {
+                ccMain.Content = new InsertTeamsControl();
+                ((View)ccMain.Content).ViewFinished += InsertTeams_ViewFinished;
+            }
+        }
+        private void InsertTeams_ViewFinished(object sender, ViewFinishedEventArgs e)
+        {
+            cm.Teams = (IEnumerable<ContestTeam>)e.Data;
+            ccMain.Content = new InsertTasksControl();
+            ((View)ccMain.Content).ViewFinished += InsertTasks_ViewFinished;
+        }
+
+        private void InsertTasks_ViewFinished(object sender, ViewFinishedEventArgs e)
+        {
+            cm.Tasks = (IEnumerable<ContestTask>)e.Data;
+            new RankingWindow(cm).Show();
+        }
     }
 }
