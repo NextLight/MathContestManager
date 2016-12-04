@@ -22,7 +22,7 @@ namespace MathContestManager
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        public ContestManager cm;
+        public ContestManager cm = new ContestManager();
 
         public MainWindow()
         {

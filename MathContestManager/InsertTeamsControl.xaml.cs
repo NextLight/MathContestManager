@@ -32,7 +32,7 @@ namespace MathContestManager
         private void Control_Loaded(object sender, RoutedEventArgs e)
         {
             parentWindow = Window.GetWindow(this) as MainWindow;
-            itcTeams.Items.Add(new Team());
+            itcTeams.Items.Add(new ContestTeam());
         }
 
         private void TextBox_Loaded(object sender, RoutedEventArgs e)
@@ -48,12 +48,12 @@ namespace MathContestManager
 
         private void btnAddItemTeam_Click(object sender, RoutedEventArgs e)
         {
-            itcTeams.Items.Add(new Team());
+            itcTeams.Items.Add(new ContestTeam());
         }
 
         private void btnInsertTeams_Click(object sender, RoutedEventArgs e)
         {
-            parentWindow.cm = new ContestManager(itcTeams.Items.Cast<Team>());
+            parentWindow.cm.Teams = itcTeams.Items.Cast<ContestTeam>();
             parentWindow.ccMain.Content = new InsertTasksControl();
         }
 

@@ -32,12 +32,12 @@ namespace MathContestManager
         private void Control_Loaded(object sender, RoutedEventArgs e)
         {
             parentWindow = Window.GetWindow(this) as MainWindow;
-            itcTasks.Items.Add(new Solution());
+            itcTasks.Items.Add(new ContestTask());
         }
 
         private void btnAddItemTask_Click(object sender, RoutedEventArgs e)
         {
-            itcTasks.Items.Add(new Solution());
+            itcTasks.Items.Add(new ContestTask());
         }
 
         private void TextBox_Loaded(object sender, RoutedEventArgs e)
@@ -53,11 +53,7 @@ namespace MathContestManager
 
         private void btnInsertTasks_Click(object sender, RoutedEventArgs e)
         {
-            Task.SetValues(itcTasks.Items.Cast<Solution>(), 10);
-
-            // Create an instance for tasks in every team
-            List<Task> tmpList = new Task[itcTasks.Items.Count].Select((x, i) => new Task(i)).ToList();
-            parentWindow.cm.Teams = parentWindow.cm.Teams.Select((x, i) => new Team() { Name = x.Name, Tasks = tmpList.ToList() }).ToList(); //TODO: try to do this in a better way
+            parentWindow.cm.Tasks = itcTasks.Items.Cast<ContestTask>() ;
 
             new RankingWindow(parentWindow.cm).Show();
         }

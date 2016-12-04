@@ -8,28 +8,36 @@ namespace MathContestManager
 {
     public class ContestManager
     {
+        private IEnumerable<ContestTask> _tasks;
+        private IEnumerable<ContestTeam> _teams;
+
         /// <summary>
         /// List of teams in the match
         /// </summary>
-        public List<Team> Teams { get; set; }
-
-        public ContestManager(IEnumerable<Team> teams)
+        public IEnumerable<ContestTeam> Teams
         {
-            Teams = teams.ToList();
+            get { return _teams; }
+            set
+            {
+                if (_teams != null)
+                    throw new Exception("You can set teams only once!");
+                _teams = value.ToList();
+            }
         }
 
-        /// <summary>
-        /// Insert the answer for a task given from a team
-        /// </summary>
-        /// <param name="teamName">Name of the team wich gave the answer</param>
-        /// <param name="taskId">Index of the task</param>
-        /// <param name="answer">Answer</param>
-        public void InsertAnswer(string teamName, int taskId, int answer)
+        public IEnumerable<ContestTask> Tasks
         {
-            var tasks = Teams.First(x => x.Name == teamName).Tasks;
-            if (!tasks.Any(t => t.Id == taskId))
-                tasks.Add(new Task(taskId));
-            tasks.First(t => t.Id == taskId).InsertAnswer(answer);
+            get { return _tasks; }
+            set
+            {
+                if (Teams == null)
+                    throw new Exception("You must set teams first!");
+                if (_tasks != null)
+                    throw new Exception("You can set tasks only once!");
+                _tasks = value.ToList();
+                foreach (ContestTeam team in Teams)
+                    team.Tasks = _tasks.Select(task => new ContestTaskScore(task));
+            }
         }
     }
 }

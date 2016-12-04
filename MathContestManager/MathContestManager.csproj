@@ -79,6 +79,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ContestManager.cs" />
+    <Compile Include="ContestTask.cs" />
+    <Compile Include="ContestTaskScore.cs" />
+    <Compile Include="ContestTeam.cs" />
     <Compile Include="InsertTasksControl.xaml.cs">
       <DependentUpon>InsertTasksControl.xaml</DependentUpon>
     </Compile>
@@ -91,8 +94,6 @@
     <Compile Include="StartControl.xaml.cs">
       <DependentUpon>StartControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Task.cs" />
-    <Compile Include="Team.cs" />
     <Page Include="InsertTasksControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
